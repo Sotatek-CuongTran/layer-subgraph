@@ -17,7 +17,7 @@ dataSources:
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
-        - Rebalancer
+        - Factory
       abis:
         - name: Factory
           file: ./abis/RebalancerFactory.json
@@ -39,6 +39,7 @@ templates:
       file: ./src/mappings/rebalancer.ts
       entities:
         - Rebalancer
+        - Amount
       abis:
         - name: Rebalancer
           file: ./abis/RebalancerV2.json

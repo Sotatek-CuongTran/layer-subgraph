@@ -1,7 +1,8 @@
-import { RebalancerCreated } from "../types/Factory/Factory";
-import { Factory } from "../types/schema";
+import { RebalancerV2Created } from "../types/Factory/Factory";
+import { Factory, Rebalancer } from "../types/schema";
+import { Rebalancer as RebalancerContract } from "../types/templates";
 
-export function handleNewPool(event: RebalancerCreated): void {
+export function handleNewPool(event: RebalancerV2Created): void {
   let factory = Factory.load("1");
 
   // if no factory yet, set up blank initial
@@ -11,4 +12,9 @@ export function handleNewPool(event: RebalancerCreated): void {
   }
   factory.rebalancer_count += 1;
   factory.save();
+
+  let rebalancer = new Rebalancer(event.params.rebalancer.toHexString());
+  rebalancer.save();
+
+  RebalancerContract.create(event.params.rebalancer);
 }

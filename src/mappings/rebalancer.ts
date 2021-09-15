@@ -1,13 +1,15 @@
-import { Transfer } from "./../types/Factory/Pool";
-import { Amount } from "../types/schema";
 import { BigInt, log } from "@graphprotocol/graph-ts";
+import { Amount } from "../types/schema";
+import { Transfer } from "../types/templates/Rebalancer/Rebalancer";
 
 export function handleTransfer(event: Transfer): void {
   log.info("xxx", ["xxx"]);
+
   let senderId = event.params.from.toHex();
   let recipientId = event.params.to.toHex();
-  let amoutTransfer = event.params.value;
+  let amountTransfer = event.params.value;
   let rblAddress = event.address.toHex();
+
   let sender = Amount.load(senderId + rblAddress);
   let recipient = Amount.load(recipientId + rblAddress);
   if (!sender) {
