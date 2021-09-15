@@ -1,0 +1,20 @@
+type Rebalancer @entity {
+    id: ID!
+    tokenA: String!
+    tokenB: String!
+    fee: Int!
+    pool: String!
+    rebalancer: String!
+}
+
+type Factory @entity {
+    id: ID!
+    rebalancer_count: Int!
+}
+
+type Amount @entity {
+    id: ID!
+    user_addess: String!
+    amount: BigInt!    
+    rebalancer_address: String!
+}

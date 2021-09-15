@@ -1,0 +1,47 @@
+specVersion: 0.0.2
+description: Subgraph for layer-exchange
+repository: https://github.com/layer-exchange/layer-subgraph
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Factory
+    network: rinkeby
+    source:
+      address: "0xCF98d1F1f37eBfd386f63b7E4e546419E6c1Ed7F"
+      abi: Factory
+      startBlock: 9135385
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/factory.ts
+      entities:
+        - Rebalancer
+      abis:
+        - name: Factory
+          file: ./abis/RebalancerFactory.json
+        - name: Rebalancer
+          file: ./abis/RebalancerV2.json
+      eventHandlers:
+        - event: RebalancerV2Created(indexed address,indexed address,indexed uint24,address,address)
+          handler: handleNewPool
+templates:
+  - kind: ethereum/contract
+    name: Rebalancer
+    network: rinkeby
+    source:
+      abi: Rebalancer
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: ./src/mappings/rebalancer.ts
+      entities:
+        - Rebalancer
+      abis:
+        - name: Rebalancer
+          file: ./abis/RebalancerV2.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

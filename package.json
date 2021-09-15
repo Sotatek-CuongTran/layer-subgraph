@@ -1,0 +1,23 @@
+{
+  "name": "balancer",
+  "version": "0.1.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "create": "graph create layer-exchange/layer-subgraph --node https://api.thegraph.com/deploy/",
+    "codegen": "graph codegen --output-dir src/types/",
+    "build": "graph build",
+    "deploy": "graph deploy layer-exchange/layer-subgraph --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/"
+  },
+  "devDependencies": {
+    "@graphprotocol/graph-cli": "^0.18.0",
+    "@graphprotocol/graph-ts": "^0.18.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "babel-register": "^6.26.0",
+    "keytar": "^5.0.0",
+    "truffle": "^5.1.0",
+    "truffle-contract": "^4.0.5",
+    "truffle-hdwallet-provider": "^1.0.4"
+  }
+}
