@@ -1,7 +1,7 @@
-import { RebalancerCreated } from "../types/Factory/Factory";
+import { RebalancerV2Created } from "../types/Factory/Factory";
 import { Factory } from "../types/schema";
 
-export function handleNewPool(event: RebalancerCreated): void {
+export function handleNewPool(event: RebalancerV2Created): void {
   let factory = Factory.load("1");
 
   // if no factory yet, set up blank initial
